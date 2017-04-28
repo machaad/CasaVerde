@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="signInApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="assets/components/angular-material/angular-material.css"/>
+
+    <meta charset="utf-8" />
+    <title>AngularJS User Registration and Login Example</title>
+
+    <script src="assets/components/jquery/dist/jquery.js"></script>
+    <!--Angular Material Dependencies-->
+    <script src="assets/components/angular/angular.js"></script>
+    <script src="assets/components/angular-animate/angular-animate.js"></script>
+    <script src="assets/components/angular-aria/angular-aria.js"></script>
+    <script src="assets/components/angular-material/angular-material.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
+    <script src="assets/components/angular-material-data-table/dist/md-data-table.js"></script>
+
+    <!--App Dependencies-->
+    <script src="assets/components/angular-animate/angular-animate.js"></script>
+    <script src="assets/components/angular-messages/angular-messages.js"></script>
+    <script src="assets/components/angular-resource/angular-resource.js"></script>
+    <script src="assets/components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="assets/components/angular-translate/angular-translate.js"></script>
+    <script src="assets/components/angular-translate-handler-log/angular-translate-handler-log.js"></script>
+    <script src="assets/components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="assets/components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="assets/components/ngstorage/ngstorage.js"></script>
+
+    <script src="assets/app/app.js"></script>
+    <script src="assets/app/routes.js"></script>
+    <script src="assets/app/services/authentication.service.js"></script>
+    <script src="assets/app/services/utils.service.js"></script>
+    <script src="assets/app/login/login.controller.js"></script>
+</head>
+<body>
+<md-toolbar md-scroll-shrink ng-if="true">
+    <div class="md-toolbar-tools">
+        <h3>
+            <span>{{'app.name' | translate}}</span>
+        </h3>
+    </div>
+</md-toolbar>
+<div ui-view></div>
+</body>
+</html>

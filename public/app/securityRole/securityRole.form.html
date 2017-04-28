@@ -1,0 +1,35 @@
+<md-dialog flex="40">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 ng-show="isNew">{{'view.securityRole.new' | translate}}</h2>
+            <h2 ng-show="!isNew">{{entity.name}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <ng-md-icon icon="close" style="fill: white" aria-label="{{'action.closeDialog' | translate}}"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+        <form name="entityForm" ng-submit="submit()">
+            <md-input-container>
+                <label>{{'view.securityRole.name' | translate}}</label>
+                <input required auto-focus name="name" ng-model="entity.name">
+                <div ng-messages="entityForm.name.$error">
+                    <div ng-message="required">{{'view.validation.required' | translate }}</div>
+                </div>
+            </md-input-container>
+            <md-subheader class="md-primary">{{'view.securityRole.permissions' | translate}}</md-subheader>
+
+            <md-checkbox ng-repeat="permission in entity.permissions" ng-model="permission.right" aria-label="{{'view.' + permission.value + '.title' | translate}}">
+                {{'view.' + permission.value + '.title' | translate}}
+            </md-checkbox>
+        </form>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <span flex></span>
+        <md-button ng-click="cancel()">{{'action.cancel' | translate}}</md-button>
+        <md-button md-no-ink class="md-primary" ng-disabled="entityForm.$invalid" ng-click="submit()">Ok</md-button>
+
+    </div>
+</md-dialog>

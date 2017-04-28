@@ -1,0 +1,697 @@
+2015-10-08 14:04:20,334 - [INFO] - from play in pool-4-thread-5 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2015-10-08 14:04:22,636 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-internal-execution-context-1 
+JDBC URL = jdbc:h2:mem:play;DB_CLOSE_DELAY=-1, Username = null, partitions = 1, max (per partition) = 30, min (per partition) = 5, idle max age = 10 min, idle test period = 1 min, strategy = DEFAULT
+
+2015-10-08 14:04:22,642 - [WARN] - from com.jolbox.bonecp.BoneCPConfig in play-internal-execution-context-1 
+JDBC username was not set in config!
+
+2015-10-08 14:04:22,642 - [WARN] - from com.jolbox.bonecp.BoneCPConfig in play-internal-execution-context-1 
+JDBC password was not set in config!
+
+2015-10-08 14:04:22,991 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-10-08 14:04:23,564 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-internal-execution-context-1 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2015-10-08 14:04:23,566 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-internal-execution-context-1 
+
+              create table play_evolutions (
+                  id int not null primary key, hash varchar(255) not null,
+                  applied_at timestamp not null,
+                  apply_script text,
+                  revert_script text,
+                  state varchar(255),
+                  last_problem text
+              )
+          
+
+2015-10-08 14:04:23,567 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-internal-execution-context-1 
+
+            select id, hash, apply_script, revert_script from play_evolutions order by id
+        
+
+2015-10-08 14:04:23,591 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6nlcflff4 - Internal server error, for (GET) [/] ->
+
+play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evolution![An SQL script need to be run on your database.]
+	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1$$anonfun$apply$1.apply$mcV$sp(Evolutions.scala:510) ~[play-jdbc_2.11-2.3.4.jar:2.3.4]
+	at play.api.db.evolutions.EvolutionsPlugin.withLock(Evolutions.scala:531) ~[play-jdbc_2.11-2.3.4.jar:2.3.4]
+	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1.apply(Evolutions.scala:485) ~[play-jdbc_2.11-2.3.4.jar:2.3.4]
+	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1.apply(Evolutions.scala:483) ~[play-jdbc_2.11-2.3.4.jar:2.3.4]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.db.evolutions.EvolutionsPlugin.onStart(Evolutions.scala:483) ~[play-jdbc_2.11-2.3.4.jar:2.3.4]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+
+2015-10-08 14:04:26,258 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2015-10-08 14:04:26,261 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+
+            select id, hash, apply_script, revert_script from play_evolutions order by id
+        
+
+2015-10-08 14:04:26,262 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2015-10-08 14:04:26,267 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in New I/O worker #1 
+insert into play_evolutions values(1, '0ebadf912ebefc69861235daa69282e1594221e2', 2015-10-08, 'create table security_permission (
+id                        bigint not null,
+updated_by                bigint,
+created_by                bigint,
+created                   timestamp,
+updated                   timestamp,
+value                     varchar(255) not null,
+section                   varchar(255) not null,
+icon                      varchar(255),
+constraint pk_security_permission primary key (id))
+;
+
+create table security_role (
+id                        bigint not null,
+updated_by                bigint,
+created_by                bigint,
+created                   timestamp,
+updated                   timestamp,
+name                      varchar(255),
+constraint pk_security_role primary key (id))
+;
+
+create table todo (
+id                        bigint not null,
+updated_by                bigint,
+created_by                bigint,
+created                   timestamp,
+updated                   timestamp,
+value                     varchar(140) not null,
+user_id                   bigint,
+done                      boolean,
+constraint pk_todo primary key (id))
+;
+
+create table user (
+id                        bigint not null,
+updated_by                bigint,
+created_by                bigint,
+created                   timestamp,
+updated                   timestamp,
+auth_token                varchar(255),
+email                     varchar(256) not null,
+sha_password              varbinary(64) not null,
+name                      varchar(256) not null,
+last_name                 varchar(256) not null,
+role_id                   bigint,
+constraint uq_user_email unique (email),
+constraint pk_user primary key (id))
+;
+
+
+create table security_role_security_permissio (
+security_role_id               bigint not null,
+security_permission_id         bigint not null,
+constraint pk_security_role_security_permissio primary key (security_role_id, security_permission_id))
+;
+create sequence security_permission_seq;
+
+create sequence security_role_seq;
+
+create sequence todo_seq;
+
+create sequence user_seq;
+
+alter table security_permission add constraint fk_security_permission_updated_1 foreign key (updated_by) references user (id) on delete restrict on update restrict;
+create index ix_security_permission_updated_1 on security_permission (updated_by);
+alter table security_permission add constraint fk_security_permission_created_2 foreign key (created_by) references user (id) on delete restrict on update restrict;
+create index ix_security_permission_created_2 on security_permission (created_by);
+alter table security_role add constraint fk_security_role_updatedBy_3 foreign key (updated_by) references user (id) on delete restrict on update restrict;
+create index ix_security_role_updatedBy_3 on security_role (updated_by);
+alter table security_role add constraint fk_security_role_createdBy_4 foreign key (created_by) references user (id) on delete restrict on update restrict;
+create index ix_security_role_createdBy_4 on security_role (created_by);
+alter table todo add constraint fk_todo_updatedBy_5 foreign key (updated_by) references user (id) on delete restrict on update restrict;
+create index ix_todo_updatedBy_5 on todo (updated_by);
+alter table todo add constraint fk_todo_createdBy_6 foreign key (created_by) references user (id) on delete restrict on update restrict;
+create index ix_todo_createdBy_6 on todo (created_by);
+alter table todo add constraint fk_todo_user_7 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_todo_user_7 on todo (user_id);
+alter table user add constraint fk_user_updatedBy_8 foreign key (updated_by) references user (id) on delete restrict on update restrict;
+create index ix_user_updatedBy_8 on user (updated_by);
+alter table user add constraint fk_user_createdBy_9 foreign key (created_by) references user (id) on delete restrict on update restrict;
+create index ix_user_createdBy_9 on user (created_by);
+alter table user add constraint fk_user_role_10 foreign key (role_id) references security_role (id) on delete restrict on update restrict;
+create index ix_user_role_10 on user (role_id);
+
+
+
+alter table security_role_security_permissio add constraint fk_security_role_security_per_01 foreign key (security_role_id) references security_role (id) on delete restrict on update restrict;
+
+alter table security_role_security_permissio add constraint fk_security_role_security_per_02 foreign key (security_permission_id) references security_permission (id) on delete restrict on update restrict;', 'SET REFERENTIAL_INTEGRITY FALSE;
+
+drop table if exists security_permission;
+
+drop table if exists security_role;
+
+drop table if exists security_role_security_permissio;
+
+drop table if exists todo;
+
+drop table if exists user;
+
+SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists security_permission_seq;
+
+drop sequence if exists security_role_seq;
+
+drop sequence if exists todo_seq;
+
+drop sequence if exists user_seq;', 'applying_up', '')
+
+2015-10-08 14:04:26,274 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create table security_permission (
+id                        bigint not null,
+updated_by                bigint,
+created_by                bigint,
+created                   timestamp,
+updated                   timestamp,
+value                     varchar(255) not null,
+section                   varchar(255) not null,
+icon                      varchar(255),
+constraint pk_security_permission primary key (id))
+
+2015-10-08 14:04:26,275 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create table security_role (
+id                        bigint not null,
+updated_by                bigint,
+created_by                bigint,
+created                   timestamp,
+updated                   timestamp,
+name                      varchar(255),
+constraint pk_security_role primary key (id))
+
+2015-10-08 14:04:26,276 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create table todo (
+id                        bigint not null,
+updated_by                bigint,
+created_by                bigint,
+created                   timestamp,
+updated                   timestamp,
+value                     varchar(140) not null,
+user_id                   bigint,
+done                      boolean,
+constraint pk_todo primary key (id))
+
+2015-10-08 14:04:26,277 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create table user (
+id                        bigint not null,
+updated_by                bigint,
+created_by                bigint,
+created                   timestamp,
+updated                   timestamp,
+auth_token                varchar(255),
+email                     varchar(256) not null,
+sha_password              varbinary(64) not null,
+name                      varchar(256) not null,
+last_name                 varchar(256) not null,
+role_id                   bigint,
+constraint uq_user_email unique (email),
+constraint pk_user primary key (id))
+
+2015-10-08 14:04:26,278 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create table security_role_security_permissio (
+security_role_id               bigint not null,
+security_permission_id         bigint not null,
+constraint pk_security_role_security_permissio primary key (security_role_id, security_permission_id))
+
+2015-10-08 14:04:26,279 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create sequence security_permission_seq
+
+2015-10-08 14:04:26,280 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create sequence security_role_seq
+
+2015-10-08 14:04:26,280 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create sequence todo_seq
+
+2015-10-08 14:04:26,280 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create sequence user_seq
+
+2015-10-08 14:04:26,281 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table security_permission add constraint fk_security_permission_updated_1 foreign key (updated_by) references user (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,287 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_security_permission_updated_1 on security_permission (updated_by)
+
+2015-10-08 14:04:26,288 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table security_permission add constraint fk_security_permission_created_2 foreign key (created_by) references user (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,289 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_security_permission_created_2 on security_permission (created_by)
+
+2015-10-08 14:04:26,289 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table security_role add constraint fk_security_role_updatedBy_3 foreign key (updated_by) references user (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,291 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_security_role_updatedBy_3 on security_role (updated_by)
+
+2015-10-08 14:04:26,291 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table security_role add constraint fk_security_role_createdBy_4 foreign key (created_by) references user (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,292 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_security_role_createdBy_4 on security_role (created_by)
+
+2015-10-08 14:04:26,292 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table todo add constraint fk_todo_updatedBy_5 foreign key (updated_by) references user (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,293 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_todo_updatedBy_5 on todo (updated_by)
+
+2015-10-08 14:04:26,293 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table todo add constraint fk_todo_createdBy_6 foreign key (created_by) references user (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,295 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_todo_createdBy_6 on todo (created_by)
+
+2015-10-08 14:04:26,295 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table todo add constraint fk_todo_user_7 foreign key (user_id) references user (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,296 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_todo_user_7 on todo (user_id)
+
+2015-10-08 14:04:26,296 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table user add constraint fk_user_updatedBy_8 foreign key (updated_by) references user (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,297 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_user_updatedBy_8 on user (updated_by)
+
+2015-10-08 14:04:26,298 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table user add constraint fk_user_createdBy_9 foreign key (created_by) references user (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,299 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_user_createdBy_9 on user (created_by)
+
+2015-10-08 14:04:26,299 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table user add constraint fk_user_role_10 foreign key (role_id) references security_role (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,301 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+create index ix_user_role_10 on user (role_id)
+
+2015-10-08 14:04:26,301 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table security_role_security_permissio add constraint fk_security_role_security_per_01 foreign key (security_role_id) references security_role (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,302 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+alter table security_role_security_permissio add constraint fk_security_role_security_per_02 foreign key (security_permission_id) references security_permission (id) on delete restrict on update restrict
+
+2015-10-08 14:04:26,304 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+update play_evolutions set state = 'applied' where id = 1
+
+2015-10-08 14:04:26,306 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in New I/O worker #1 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2015-10-08 14:04:26,614 - [INFO] - from com.jolbox.bonecp.BoneCP in play-internal-execution-context-1 
+Shutting down connection pool...
+
+2015-10-08 14:04:26,615 - [DEBUG] - from com.jolbox.bonecp.PoolWatchThread in BoneCP-pool-watch-thread 
+Terminating pool watch thread
+
+2015-10-08 14:04:26,616 - [INFO] - from com.jolbox.bonecp.BoneCP in play-internal-execution-context-1 
+Connection pool has been shutdown.
+
+2015-10-08 14:04:26,616 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-internal-execution-context-1 
+Connection pool has been shut down
+
+2015-10-08 14:04:26,667 - [DEBUG] - from com.jolbox.bonecp.BoneCPDataSource in play-internal-execution-context-1 
+JDBC URL = jdbc:h2:mem:play;DB_CLOSE_DELAY=-1, Username = null, partitions = 1, max (per partition) = 30, min (per partition) = 5, idle max age = 10 min, idle test period = 1 min, strategy = DEFAULT
+
+2015-10-08 14:04:26,667 - [WARN] - from com.jolbox.bonecp.BoneCPConfig in play-internal-execution-context-1 
+JDBC username was not set in config!
+
+2015-10-08 14:04:26,668 - [WARN] - from com.jolbox.bonecp.BoneCPConfig in play-internal-execution-context-1 
+JDBC password was not set in config!
+
+2015-10-08 14:04:26,670 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-10-08 14:04:26,734 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-internal-execution-context-1 
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%'
+
+2015-10-08 14:04:26,735 - [DEBUG] - from com.jolbox.bonecp.StatementHandle in play-internal-execution-context-1 
+
+            select id, hash, apply_script, revert_script from play_evolutions order by id
+        
+
+2015-10-08 14:04:26,893 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0
+
+2015-10-08 14:04:26,896 - [INFO] - from application in play-internal-execution-context-1 
+Loading starupData
+
+2015-10-08 14:04:26,901 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval union select security_permission_seq.nextval
+
+2015-10-08 14:04:26,909 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into security_permission (id, created, updated, value, section, icon, updated_by, created_by) values (1,2015-10-08 14:04:26.906,2015-10-08 14:04:26.906,'securityRole','management','assignment_ind','[SQL NULL of type -5]','[SQL NULL of type -5]')
+
+2015-10-08 14:04:26,915 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into security_permission (id, created, updated, value, section, icon, updated_by, created_by) values (2,2015-10-08 14:04:26.914,2015-10-08 14:04:26.914,'todo','management','list','[SQL NULL of type -5]','[SQL NULL of type -5]')
+
+2015-10-08 14:04:26,915 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into security_permission (id, created, updated, value, section, icon, updated_by, created_by) values (3,2015-10-08 14:04:26.915,2015-10-08 14:04:26.915,'user','management','people','[SQL NULL of type -5]','[SQL NULL of type -5]')
+
+2015-10-08 14:04:26,917 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval union select security_role_seq.nextval
+
+2015-10-08 14:04:26,920 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into security_role (id, created, updated, name, updated_by, created_by) values (1,2015-10-08 14:04:26.919,2015-10-08 14:04:26.919,'admin','[SQL NULL of type -5]','[SQL NULL of type -5]')
+
+2015-10-08 14:04:26,927 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+delete from security_role_security_permissio where security_role_id = 1
+
+2015-10-08 14:04:26,931 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into security_role_security_permissio (security_role_id, security_permission_id) values (1, 1)
+
+2015-10-08 14:04:26,932 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into security_role_security_permissio (security_role_id, security_permission_id) values (1, 2)
+
+2015-10-08 14:04:26,932 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into security_role_security_permissio (security_role_id, security_permission_id) values (1, 3)
+
+2015-10-08 14:04:26,934 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval union select user_seq.nextval
+
+2015-10-08 14:04:26,936 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into user (id, created, updated, auth_token, email, sha_password, name, last_name, updated_by, created_by, role_id) values (1,2015-10-08 14:04:26.936,2015-10-08 14:04:26.936,'[SQL NULL of type 12]','user1@demo.com',[B@2b5358c,'John','Doe','[SQL NULL of type -5]','[SQL NULL of type -5]',1)
+
+2015-10-08 14:04:26,938 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval union select todo_seq.nextval
+
+2015-10-08 14:04:26,941 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into todo (id, created, updated, value, done, updated_by, created_by, user_id) values (1,2015-10-08 14:04:26.94,2015-10-08 14:04:26.94,'make it secure',false,'[SQL NULL of type -5]','[SQL NULL of type -5]',1)
+
+2015-10-08 14:04:26,942 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into todo (id, created, updated, value, done, updated_by, created_by, user_id) values (2,2015-10-08 14:04:26.942,2015-10-08 14:04:26.942,'make it neat',false,'[SQL NULL of type -5]','[SQL NULL of type -5]',1)
+
+2015-10-08 14:04:26,943 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into user (id, created, updated, auth_token, email, sha_password, name, last_name, updated_by, created_by, role_id) values (2,2015-10-08 14:04:26.943,2015-10-08 14:04:26.943,'[SQL NULL of type 12]','user2@demo.com',[B@63c3a056,'Jane','Doe','[SQL NULL of type -5]','[SQL NULL of type -5]','[SQL NULL of type -5]')
+
+2015-10-08 14:04:26,944 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-internal-execution-context-1 
+insert into todo (id, created, updated, value, done, updated_by, created_by, user_id) values (3,2015-10-08 14:04:26.944,2015-10-08 14:04:26.944,'make it pretty',false,'[SQL NULL of type -5]','[SQL NULL of type -5]',2)
+
+2015-10-08 14:04:26,950 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-10-08 14:04:29,601 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-6 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.email = 'user1@demo.com'  and t0.sha_password = [B@123b81a5 
+
+2015-10-08 14:04:29,601 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-3 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.email = 'user1@demo.com'  and t0.sha_password = [B@57dc8975 
+
+2015-10-08 14:04:29,610 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-6 
+update user set updated=2015-10-08 14:04:29.607, auth_token='36125052-353f-45ef-837a-7971f869fd5c' where id=1 and created=2015-10-08 14:04:26.936 and updated=2015-10-08 14:04:26.936 and auth_token is null and email='user1@demo.com' and sha_password=[B@4b899d04 and name='John' and last_name='Doe' and role_id=1
+
+2015-10-08 14:04:29,610 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-3 
+update user set updated=2015-10-08 14:04:29.607, auth_token='84a9fa83-82c5-4b17-8a31-c1509fcd5d1f' where id=1 and created=2015-10-08 14:04:26.936 and updated=2015-10-08 14:04:26.936 and auth_token is null and email='user1@demo.com' and sha_password=[B@73592de and name='John' and last_name='Doe' and role_id=1
+
+2015-10-08 14:04:29,617 - [ERROR] - from play in play-akka.actor.default-dispatcher-3 
+Cannot invoke the action, eventually got an error: javax.persistence.OptimisticLockException: Data has changed. updated [0] rows sql[update user set updated=?, auth_token=? where id=? and created=? and updated=? and auth_token is null and email=? and sha_password=? and name=? and last_name=? and role_id=?] bind[null]
+
+2015-10-08 14:04:29,648 - [ERROR] - from application in play-akka.actor.default-dispatcher-3 
+
+
+! @6nlcfloe6 - Internal server error, for (POST) [/api/v1/login] ->
+
+play.api.Application$$anon$1: Execution exception[[OptimisticLockException: Data has changed. updated [0] rows sql[update user set updated=?, auth_token=? where id=? and created=? and updated=? and auth_token is null and email=? and sha_password=? and name=? and last_name=? and role_id=?] bind[null]]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.4.jar:2.3.4]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.4.jar:2.3.4]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.4.jar:2.3.4]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.4.jar:2.3.4]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.1.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+Caused by: javax.persistence.OptimisticLockException: Data has changed. updated [0] rows sql[update user set updated=?, auth_token=? where id=? and created=? and updated=? and auth_token is null and email=? and sha_password=? and name=? and last_name=? and role_id=?] bind[null]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlHandler.checkRowCount(DmlHandler.java:95) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.UpdateHandler.execute(UpdateHandler.java:81) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:86) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.update(DmlBeanPersister.java:66) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersistExecute.executeUpdateBean(DefaultPersistExecute.java:82) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeNow(PersistRequestBean.java:452) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeOrQueue(PersistRequestBean.java:478) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.update(DefaultPersister.java:361) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:304) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:276) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.save(DefaultPersister.java:244) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1610) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1600) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebean.Ebean.save(Ebean.java:453) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at play.db.ebean.Model.save(Model.java:95) ~[play-java-ebean_2.11-2.3.4.jar:2.3.4]
+	at models.User.createToken(User.java:73) ~[classes/:na]
+	at controllers.SecurityCtrl.login(SecurityCtrl.java:43) ~[classes/:2.3.4]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$4$$anonfun$apply$4.apply(routes_routing.scala:209) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$4$$anonfun$apply$4.apply(routes_routing.scala:209) ~[classes/:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.1.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	... 6 common frames omitted
+
+2015-10-08 14:04:31,140 - [ERROR] - from be.objectify.deadbolt.java.actions.AbstractDeadboltAction in play-akka.actor.default-dispatcher-7 
+Access to [/api/v1/menu] requires a subject, but no subject is present.
+
+2015-10-08 14:04:32,797 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-6 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.email = 'user1@demo.com'  and t0.sha_password = [B@4e236237 
+
+2015-10-08 14:04:32,798 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-2 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.email = 'user1@demo.com'  and t0.sha_password = [B@50800c58 
+
+2015-10-08 14:04:32,799 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-6 
+update user set updated=2015-10-08 14:04:32.798, auth_token='43a8848f-2de4-4271-ae19-fe12a0d6dfa9' where id=1 and created=2015-10-08 14:04:26.936 and updated=2015-10-08 14:04:29.607 and auth_token='36125052-353f-45ef-837a-7971f869fd5c' and email='user1@demo.com' and sha_password=[B@1c543e13 and name='John' and last_name='Doe' and role_id=1
+
+2015-10-08 14:04:32,800 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-2 
+update user set updated=2015-10-08 14:04:32.799, auth_token='dda534f7-d6e7-4daf-883c-adb7aa095a56' where id=1 and created=2015-10-08 14:04:26.936 and updated=2015-10-08 14:04:29.607 and auth_token='36125052-353f-45ef-837a-7971f869fd5c' and email='user1@demo.com' and sha_password=[B@79e82c6 and name='John' and last_name='Doe' and role_id=1
+
+2015-10-08 14:04:32,806 - [ERROR] - from play in play-akka.actor.default-dispatcher-2 
+Cannot invoke the action, eventually got an error: javax.persistence.OptimisticLockException: Data has changed. updated [0] rows sql[update user set updated=?, auth_token=? where id=? and created=? and updated=? and auth_token=? and email=? and sha_password=? and name=? and last_name=? and role_id=?] bind[null]
+
+2015-10-08 14:04:32,813 - [ERROR] - from application in play-akka.actor.default-dispatcher-2 
+
+
+! @6nlcfm364 - Internal server error, for (POST) [/api/v1/login] ->
+
+play.api.Application$$anon$1: Execution exception[[OptimisticLockException: Data has changed. updated [0] rows sql[update user set updated=?, auth_token=? where id=? and created=? and updated=? and auth_token=? and email=? and sha_password=? and name=? and last_name=? and role_id=?] bind[null]]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.4.jar:2.3.4]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.4.jar:2.3.4]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.4.jar:2.3.4]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.4.jar:2.3.4]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.1.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+Caused by: javax.persistence.OptimisticLockException: Data has changed. updated [0] rows sql[update user set updated=?, auth_token=? where id=? and created=? and updated=? and auth_token=? and email=? and sha_password=? and name=? and last_name=? and role_id=?] bind[null]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlHandler.checkRowCount(DmlHandler.java:95) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.UpdateHandler.execute(UpdateHandler.java:81) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:86) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.update(DmlBeanPersister.java:66) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersistExecute.executeUpdateBean(DefaultPersistExecute.java:82) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeNow(PersistRequestBean.java:452) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeOrQueue(PersistRequestBean.java:478) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.update(DefaultPersister.java:361) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:304) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:276) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.persist.DefaultPersister.save(DefaultPersister.java:244) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1610) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1600) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at com.avaje.ebean.Ebean.save(Ebean.java:453) ~[avaje-ebeanorm-3.3.4.jar:na]
+	at play.db.ebean.Model.save(Model.java:95) ~[play-java-ebean_2.11-2.3.4.jar:2.3.4]
+	at models.User.createToken(User.java:73) ~[classes/:na]
+	at controllers.SecurityCtrl.login(SecurityCtrl.java:43) ~[classes/:2.3.4]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$4$$anonfun$apply$4.apply(routes_routing.scala:209) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$4$$anonfun$apply$4.apply(routes_routing.scala:209) ~[classes/:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.1.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.4.jar:2.3.4]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.4.jar:2.3.4]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	... 6 common frames omitted
+
+2015-10-08 14:04:33,838 - [ERROR] - from be.objectify.deadbolt.java.actions.AbstractDeadboltAction in play-akka.actor.default-dispatcher-6 
+Access to [/api/v1/menu] requires a subject, but no subject is present.
+
+2015-10-08 14:04:35,282 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-6 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.email = 'user1@demo.com'  and t0.sha_password = [B@8763e47 
+
+2015-10-08 14:04:35,284 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-6 
+update user set updated=2015-10-08 14:04:35.283, auth_token='de74c0c4-3843-4f18-bc4e-ac23989e4841' where id=1 and created=2015-10-08 14:04:26.936 and updated=2015-10-08 14:04:32.798 and auth_token='43a8848f-2de4-4271-ae19-fe12a0d6dfa9' and email='user1@demo.com' and sha_password=[B@620d8d34 and name='John' and last_name='Doe' and role_id=1
+
+2015-10-08 14:04:35,287 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.email = 'user1@demo.com'  and t0.sha_password = [B@5ba092 
+
+2015-10-08 14:04:35,289 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+update user set updated=2015-10-08 14:04:35.288, auth_token='7bd29a25-2672-42d1-8fda-4a297a53259f' where id=1 and created=2015-10-08 14:04:26.936 and updated=2015-10-08 14:04:35.283 and auth_token='de74c0c4-3843-4f18-bc4e-ac23989e4841' and email='user1@demo.com' and sha_password=[B@765f9d69 and name='John' and last_name='Doe' and role_id=1
+
+2015-10-08 14:04:36,206 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.auth_token = '7bd29a25-2672-42d1-8fda-4a297a53259f' 
+
+2015-10-08 14:04:36,225 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t1.id c1, t1.created c2, t1.updated c3, t1.value c4, t1.section c5, t1.icon c6 from security_role t0 left outer join security_role_security_permissio t1z_ on t1z_.security_role_id = t0.id  left outer join security_permission t1 on t1.id = t1z_.security_permission_id  where t0.id = 1   order by t0.id
+
+2015-10-08 14:04:36,322 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-4 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.auth_token = '7bd29a25-2672-42d1-8fda-4a297a53259f' 
+
+2015-10-08 14:04:36,324 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-4 
+select t0.id c0, t1.id c1, t1.created c2, t1.updated c3, t1.value c4, t1.section c5, t1.icon c6 from security_role t0 left outer join security_role_security_permissio t1z_ on t1z_.security_role_id = t0.id  left outer join security_permission t1 on t1.id = t1z_.security_permission_id  where t0.id = 1   order by t0.id
+
+2015-10-08 14:04:36,333 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in Ebean-default.0 
+select count(*) from todo t0 where t0.user_id = 1 
+
+2015-10-08 14:04:36,335 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in Ebean-default.1 
+select t0.id c0, t0.created c1, t0.updated c2, t0.value c3, t0.user_id c4, t0.done c5 from todo t0 where t0.user_id = 1  
+limit 11
+
+2015-10-08 14:04:37,719 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.auth_token = '7bd29a25-2672-42d1-8fda-4a297a53259f' 
+
+2015-10-08 14:04:37,720 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t1.id c1, t1.created c2, t1.updated c3, t1.value c4, t1.section c5, t1.icon c6 from security_role t0 left outer join security_role_security_permissio t1z_ on t1z_.security_role_id = t0.id  left outer join security_permission t1 on t1.id = t1z_.security_permission_id  where t0.id = 1   order by t0.id
+
+2015-10-08 14:04:37,722 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in Ebean-default.1 
+select t0.id c0, t0.created c1, t0.updated c2, t0.name c3 from security_role t0 
+limit 11
+
+2015-10-08 14:04:37,722 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in Ebean-default.0 
+select count(*) from security_role t0
+
+2015-10-08 14:04:38,306 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.auth_token = '7bd29a25-2672-42d1-8fda-4a297a53259f' 
+
+2015-10-08 14:04:38,307 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t1.id c1, t1.created c2, t1.updated c3, t1.value c4, t1.section c5, t1.icon c6 from security_role t0 left outer join security_role_security_permissio t1z_ on t1z_.security_role_id = t0.id  left outer join security_permission t1 on t1.id = t1z_.security_permission_id  where t0.id = 1   order by t0.id
+
+2015-10-08 14:04:38,309 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in Ebean-default.1 
+select t0.id c0, t0.created c1, t0.updated c2, t0.value c3, t0.user_id c4, t0.done c5 from todo t0 where t0.user_id = 1  
+limit 11
+
+2015-10-08 14:04:38,309 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in Ebean-default.0 
+select count(*) from todo t0 where t0.user_id = 1 
+
+2015-10-08 14:04:38,869 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 where t0.auth_token = '7bd29a25-2672-42d1-8fda-4a297a53259f' 
+
+2015-10-08 14:04:38,871 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t1.id c1, t1.created c2, t1.updated c3, t1.value c4, t1.section c5, t1.icon c6 from security_role t0 left outer join security_role_security_permissio t1z_ on t1z_.security_role_id = t0.id  left outer join security_permission t1 on t1.id = t1z_.security_permission_id  where t0.id = 1   order by t0.id
+
+2015-10-08 14:04:38,873 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in Ebean-default.0 
+select count(*) from user t0
+
+2015-10-08 14:04:38,873 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in Ebean-default.1 
+select t0.id c0, t0.created c1, t0.updated c2, t0.auth_token c3, t0.email c4, t0.sha_password c5, t0.name c6, t0.last_name c7, t0.role_id c8 from user t0 
+limit 11
+
+2015-10-08 14:04:38,881 - [DEBUG] - from com.jolbox.bonecp.PreparedStatementHandle in play-akka.actor.default-dispatcher-9 
+select t0.id c0, t0.created c1, t0.updated c2, t0.name c3 from security_role t0 where t0.id = 1  
+

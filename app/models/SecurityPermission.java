@@ -1,35 +1,26 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import utils.json.View;
+import be.objectify.deadbolt.core.models.Permission;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
- *Created by Pmendoza on 13/01/2016.
+ * Created by Interax on 04/06/2015.
  */
 @Entity
-@Table(name = "s_permission",
-        uniqueConstraints = @UniqueConstraint(
-                columnNames = {"role_id","module_id"})
-)
+public class SecurityPermission extends BaseEntity implements Permission{
 
-public final class SecurityPermission extends BaseEntity {
     @Id
-    @JsonView(View.RoleForm.class)
     private long id;
 
-    @ManyToOne
-    private SecurityRole role;
+    @Column(nullable = false)
+    private String value;
 
-    @ManyToOne
-    @JsonView(View.RoleForm.class)
-    private SecurityModule module;
+    @Column(nullable = false)
+    private String section;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JsonView(View.RoleForm.class)
-    private List<SecurityAction> excludedActions;
+    @Column
+    private String icon;
 
     public long getId() {
         return id;
@@ -39,30 +30,30 @@ public final class SecurityPermission extends BaseEntity {
         this.id = id;
     }
 
-    public SecurityRole getRole() {
-        return role;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public void setRole(SecurityRole role) {
-        this.role = role;
+    @Override
+    public String getValue() {
+        return value;
     }
 
-    public SecurityModule getModule() {
-        return module;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setModule(SecurityModule module) {
-        this.module = module;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public List<SecurityAction> getExcludedActions() {
-        return excludedActions;
+    public String getSection() {
+        return section;
     }
 
-    public void setExcludedActions(List<SecurityAction> excludedActions) {
-        this.excludedActions = excludedActions;
+    public void setSection(String section) {
+        this.section = section;
     }
-
-    public static final Finder<Long, SecurityPermission> find = new Finder(Long.class,SecurityPermission.class);
+    public static Finder<Long, SecurityPermission> find = new Finder<Long, SecurityPermission>(Long.class, SecurityPermission.class);
 
 }

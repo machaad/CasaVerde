@@ -1,12 +1,12 @@
 package models;
 
-import com.avaje.ebean.Model;
+import be.objectify.deadbolt.core.models.Subject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import usecase.authentication.GetCurrentUser;
-import utils.EntityUtils;
+import models.User;
+import play.db.ebean.Model;
+import play.mvc.Http;
+import utils.SecurityDeadboltHandler;
 
-import javax.annotation.PreDestroy;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -32,11 +32,9 @@ public class BaseEntity extends Model {
 
     @JsonIgnore
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(columnDefinition = "datetime")
     private Date created;
     @JsonIgnore
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(columnDefinition = "datetime")
     private Date updated;
 
     public Date getCreated() {
@@ -73,36 +71,33 @@ public class BaseEntity extends Model {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("updatedBy", updatedBy)
-                .append("createdBy", createdBy)
-                .append("created", created)
-                .append("updated", updated)
-                .toString();
+        return "BaseEntity{" +
+                "created=" + created +
+                ", updated=" + updated +
+                "} " + super.toString();
     }
 
     @PrePersist
     public void prePersist(){
         created = new Date();
         updated = new Date();
-        if(createdBy == null) {
-            User user = GetCurrentUser.execute();
-            updatedBy = user;
-            createdBy = user;
-        }else{
-            updatedBy = createdBy;
-        }
+        try {
+            User user = (User) Http.Context.current().args.get(SecurityDeadboltHandler.USER);
+            if (user != null) {
+                updatedBy = user;
+                createdBy = user;
+            }
+        }catch (Exception e){}
     }
 
     @PreUpdate
     public void preUpdate(){
         updated = new Date();
-        updatedBy = GetCurrentUser.execute();
-    }
-
-    @PreRemove
-    @PreDestroy
-    public void nullifyOnDelete(){
-        EntityUtils.startNullifying(this);
+        try {
+            User user = (User) Http.Context.current().args.get(SecurityDeadboltHandler.USER);
+            if (user != null) {
+                updatedBy = user;
+            }
+        }catch (Exception e){}
     }
 }

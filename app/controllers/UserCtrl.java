@@ -1,65 +1,41 @@
 package controllers;
 
-import be.objectify.deadbolt.java.actions.Pattern;
+import be.objectify.deadbolt.java.actions.Dynamic;
 import com.avaje.ebean.Ebean;
-import models.SecurityAction;
 import models.User;
-import org.apache.commons.lang3.RandomStringUtils;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import usecase.model.GetUser;
-import utils.ctrl.CtrlUtils;
-import utils.ctrl.PagingBuilder;
-import utils.email.Emails;
-import utils.json.JsonUtils;
-import utils.json.View;
-
-import java.util.List;
+import utils.CtrlUtils;
+import utils.FormUtils;
 
 import static play.libs.Json.toJson;
 
 /**
- * Created by Interax on 14/01/2016.
+ * Created by HeavyPollo on 9/28/15.
  */
-public class UserCtrl extends Controller {
-
-
+public class UserCtrl extends Controller{
     public static final String Module = "user";
 
-
-    @Pattern(value = Module)
-    public static Result getAll(String order, Integer limit, Integer page, String search, List<String> fields) {
-        return new PagingBuilder()
-                .query(User.find.query())
-                .order(order)
-                .limit(limit)
-                .page(page)
-                .search(search,fields)
-                .viewClass(View.Public.class)
-                .getResult();
+    @Dynamic(value = Module)
+    public static Result getAll(String order, Integer limit, Integer page) {
+        return CtrlUtils.get(User.find.query(),order,limit,page);
     }
 
-    public static Result getAll() {
-        return Controller.ok(toJson(User.find.query().findList()));
-    }
-
-
-    @Pattern(value = Module)
+    @Dynamic(value = Module)
     public static Result get(long id){
-        User entity;
-        entity = User.find.byId(id);
-        if(entity == null ){
+        User user;
+        user = User.find.byId(id);
+        if(user == null ){
             return notFound();
         }
-        return ok(JsonUtils.fromJsonView(entity, View.UserForm.class));
+        return ok(toJson(user));
     }
 
-    @Pattern(Module + "." + SecurityAction.UPDATE)
-    public static Result put(){
-        Form<User> form = Form
-                .form(User.class)
+    @Dynamic(value = Module)
+    public static Result put(long id){
+        Form<User> form = Form.form(User.class)
                 .bindFromRequest();
         if (form.hasErrors()) {
             return CtrlUtils.responseWithErrors(form, Module);
@@ -85,19 +61,19 @@ public class UserCtrl extends Controller {
         }
     }
 
-    @Pattern(Module + "." + SecurityAction.CREATE)
+    @Dynamic(value = Module)
     public static Result post(){
-        Form<User> form = Form
-                .form(User.class)
+        Form<User> form = Form.form(User.class)
                 .bindFromRequest();
         if (form.hasErrors()) {
+//
+//            Json.fromJson(Http.Context.current().request().body().asJson().get("role"), SecurityRole.class);
             return CtrlUtils.responseWithErrors(form,Module);
         }else {
 
             Ebean.beginTransaction();
             try{
                 User dto = form.get();
-                dto.setPassword(dto.getPassword());
                 CtrlUtils.checkUnique(User.find,"email",dto);
                 dto.save();
                 Ebean.commitTransaction();
@@ -110,31 +86,6 @@ public class UserCtrl extends Controller {
                     return internalServerError();
                 }
 
-            }
-            return ok();
-        }
-    }
-
-    @Pattern(value = Module + "." + SecurityAction.DELETE)
-    public static Result delete(Long id){
-        User entity = User.find.byId(id);
-        if(entity != null){
-            entity.delete();
-            return ok();
-        }else{
-            return notFound();
-        }
-    }
-
-    public static Result passwordRecovery(String email){
-        User entity = GetUser.byEmail(email);
-        if(entity == null){
-            return CtrlUtils.responseWithErrors("password","recovery.notFound",Module);
-        }else{
-            String password = RandomStringUtils.randomAlphanumeric(8);
-            if(Emails.passwordRecovery(entity,password)){
-                entity.setPassword(password);
-                entity.save();
             }
             return ok();
         }

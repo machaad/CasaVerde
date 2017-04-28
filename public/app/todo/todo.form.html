@@ -1,0 +1,30 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>{{'view.todo.new' | translate}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+            <ng-md-icon icon="close" style="fill: white" aria-label="Close dialog"></ng-md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-dialog-content layout-padding>
+    <form name="taskForm" ng-submit="submit()">
+        <md-input-container>
+            <label>{{'view.todo.value' | translate}}</label>
+            <input required name="value" ng-model="task.value">
+            <div ng-messages="taskForm.value.$error">
+                <div ng-message="required">{{'view.validation.required' | translate }}</div>
+            </div>
+        </md-input-container>
+        <md-checkbox ng-model="task.done" aria-label="Done">
+            {{'view.todo.done' | translate}}
+        </md-checkbox>
+    </form>
+</md-dialog-content>
+<div class="md-actions" layout="row">
+    <span flex></span>
+    <span flex></span>
+    <md-button ng-click="cancel()">{{'action.cancel' | translate}}</md-button>
+    <md-button md-no-ink class="md-primary" ng-disabled="taskForm.$invalid" ng-click="submit()">Ok</md-button>
+
+</div>

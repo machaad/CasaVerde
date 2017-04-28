@@ -1,0 +1,26 @@
+<div layout="row" layout-margin>
+    <div flex="25"></div>
+    <div flex="50" layout="column" layout-padding tabIndex="-1" role="main" class="md-whiteframe-z2">
+        <form name="form" ng-submit="login()" role="form">
+            <md-content layout-padding class="autoScroll">
+
+                <md-input-container class="md-icon-float">
+                    <label>{{'view.login.email' | translate}}</label>
+                    <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+                    <input ng-model="user.email" type="text">
+                </md-input-container>
+
+                <md-input-container class="md-icon-float">
+                    <label>{{'view.login.password' | translate}}</label>
+                    <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+                    <input ng-model="user.password" type="password">
+                </md-input-container>
+                <section layout="column" layout-align="center end" layout-wrap="">
+                    <md-button class="md-accent md-raised md-hue-1" ng-click="login()">{{'action.login' | translate}}</md-button>
+                </section>
+
+            </md-content>
+        </form>
+    </div>
+    <div flex="25"></div>
+</div>

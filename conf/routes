@@ -1,0 +1,32 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Angular
+GET           /                                      controllers.Default.redirect(to="/signIn")
+GET           /signIn                                controllers.Assets.at(path="/public", file="/signIn.html")
+GET           /app                                   controllers.Assets.at(path="/public", file="/index.html")
+
+# API Methods
+POST          /api/v1/login                          controllers.SecurityCtrl.login()
+POST          /api/v1/logout                         controllers.SecurityCtrl.logout()
+GET           /api/v1/menu                           controllers.AppCtrl.getMenu()
+
+GET           /api/v1/crud/todo/:id                  controllers.TodoCtrl.findById(id : Long)
+GET           /api/v1/crud/todo                      controllers.TodoCtrl.getAll(order : String ?= null, limit : java.lang.Integer ?= 0,page : java.lang.Integer ?= 0)
+POST          /api/v1/crud/todo                      controllers.TodoCtrl.createTodo()
+PUT           /api/v1/crud/todo/:id                  controllers.TodoCtrl.updateTodo(id : Long)
+DELETE        /api/v1/crud/todo/:id                  controllers.TodoCtrl.deleteTodo(id : Long)
+
+GET           /api/v1/crud/securityRole              controllers.SecurityRoleCtrl.getAll(order : String ?= null, limit : java.lang.Integer ?= 0,page : java.lang.Integer ?= 0)
+GET           /api/v1/crud/securityRole/:id          controllers.SecurityRoleCtrl.get(id : Long)
+POST          /api/v1/crud/securityRole              controllers.SecurityRoleCtrl.post()
+PUT           /api/v1/crud/securityRole/:id          controllers.SecurityRoleCtrl.put(id : Long)
+
+GET           /api/v1/crud/user                     controllers.UserCtrl.getAll(order : String ?= null, limit : java.lang.Integer ?= 0,page : java.lang.Integer ?= 0)
+GET           /api/v1/crud/user/:id                 controllers.UserCtrl.get(id : Long)
+POST          /api/v1/crud/user                     controllers.UserCtrl.post()
+PUT           /api/v1/crud/user/:id                 controllers.UserCtrl.put(id : Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET           /assets/*file                          controllers.Assets.at(path="/public", file)

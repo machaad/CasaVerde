@@ -1,66 +1,55 @@
 package models;
 
+import be.objectify.deadbolt.core.models.*;
 import be.objectify.deadbolt.core.models.Permission;
-import be.objectify.deadbolt.core.models.Subject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import play.data.validation.Constraints;
-import usecase.authentication.GetDeadboltPermissions;
-import usecase.authentication.GetSha512;
-import utils.json.View;
+import utils.containt.UpperCase;
 
 import javax.persistence.*;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-
-/**
- *Created by Pmendoza on 13/01/2016.
- */
 @Entity
-public final class User extends BaseEntity implements Subject{
+public class User extends BaseEntity implements Subject{
 
     @Id
-    @JsonView(View.Public.class)
-    private Long id;
+    public Long id;
 
-    @Column(length = 256)
+    @JsonIgnore
+    private String authToken;
+    
+    @Column(length = 256, unique = true, nullable = false)
     @Constraints.Required
-    @JsonView(View.Public.class)
     private String email;
 
 
-    @Column(length = 256, nullable = false)
-    @JsonView(View.Public.class)
-    private String givenName;
-
-    @Column(length = 256, nullable = false)
-    @JsonView(View.Public.class)
-    private String familyName;
-
-    @ManyToMany
-    @JsonView(View.UserForm.class)
-    private List<SecurityRole> roles = new ArrayList<SecurityRole>();
-
     @Column(length = 64, nullable = false)
-    @JsonIgnore
     private byte[] shaPassword;
 
     @Transient
     @JsonIgnore
     private String password;
 
+    @Column(length = 256, nullable = false)
+    public String name;
+
+    @Column(length = 256, nullable = false)
+    public String lastName;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private List<Todo> todos = new ArrayList<Todo>();
+
+    @ManyToOne
+    private SecurityRole role;
+
     public User() {
-
-    }
-
-    public User(String email, String password, String name, String lasName) {
-        setEmail(email);
-        setPassword(password);
-        this.givenName = name;
-        this.familyName = lasName;
     }
 
     public String getPassword() {
@@ -69,39 +58,25 @@ public final class User extends BaseEntity implements Subject{
 
     public void setPassword(String password) {
         this.password = password;
-        shaPassword = GetSha512.execute(password);
+        shaPassword = getSha512(password);
     }
 
-    public Long getId() {
-        return id;
+    public User(String emailAddress, String password, String name, String lasName) {
+        setEmail(emailAddress);
+        setPassword(password);
+        this.name = name;
+        this.lastName = lasName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String createToken() {
+        authToken = UUID.randomUUID().toString();
+        save();
+        return authToken;
     }
 
-    public void setRoles(List<SecurityRole> roles) {
-        this.roles = roles;
-    }
-
-    public List<? extends SecurityRole> getRoles() {
-        return roles;
-    }
-
-    public String getGivenName() {
-        return givenName;
-    }
-
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
-    }
-
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
+    public void deleteAuthToken() {
+        authToken = null;
+        save();
     }
 
     public String getEmail() {
@@ -112,17 +87,65 @@ public final class User extends BaseEntity implements Subject{
         this.email = email;
     }
 
+    public Long getId() {
+        return id;
+    }
 
-    //-----------------------------------------------------------------------------
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public List<Todo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<Todo> todos) {
+        this.todos = todos;
+    }
+
+    public SecurityRole getRole() {
+        return role;
+    }
+
+    public void setRole(SecurityRole role) {
+        this.role = role;
+    }
+
+    @Override
+    @JsonIgnore
+    public List<? extends Role> getRoles() {
+        ArrayList<Role> roles = new ArrayList<>();
+        if(roles != null) {
+            roles.add(role);
+        }
+        return roles;
+    }
+
+    @Override
     @JsonIgnore
     public List<? extends Permission> getPermissions() {
-        List<Permission> permissions = new ArrayList<Permission>();
-        for(SecurityRole role : roles){
-            for(SecurityPermission permission : role.getPermissions()){
-                permissions.addAll(GetDeadboltPermissions.execute(permission));
-            }
-        }
-        return permissions;
+        if(role == null){
+            return new ArrayList<>();
+        }else{
+
+        }return role.getPermissions();
+
     }
 
     @Override
@@ -131,7 +154,35 @@ public final class User extends BaseEntity implements Subject{
         return String.valueOf(id);
     }
 
-    public static final Finder<Long, User> find = new Finder<Long, User>(Long.class,User.class);
+    public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
+    public static User findByAuthToken(String authToken) {
+        if (authToken == null) {
+            return null;
+        }
 
+        try  {
+            return find.where().eq("authToken", authToken).findUnique();
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static byte[] getSha512(String value) {
+        try {
+            return MessageDigest.getInstance("SHA-512").digest(value.getBytes("UTF-8"));
+        }
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static User findByEmailAddressAndPassword(String emailAddress, String password) {
+        // todo: verify this query is correct.  Does it need an "and" statement?
+        return find.where().eq("email", emailAddress.toLowerCase()).eq("shaPassword", getSha512(password)).findUnique();
+    }
 }

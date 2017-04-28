@@ -1,0 +1,122 @@
+{
+  "app":{
+    "name" : "Stock"
+  },
+  "list": {
+    "itemSelected" : "item selected",
+    "itemsSelected" : "items selected"
+  },
+  "view" : {
+      "validation" : {
+        "required" : "This field is required",
+        "lessThan" : "The value must be less than {{target}}"
+      },
+      "todo": {
+          "title" : "To do List",
+          "allTasks" : "All tasks",
+          "action" :{
+            "add" : "Add task"
+          },
+        "task" : "Task",
+        "new" : "New task",
+        "done" : "Done",
+        "value" : "Value"
+      },
+    "securityRole": {
+      "title" : "Security Role",
+      "all" : "Roles",
+      "action" :{
+        "add" : "Add role"
+      },
+      "permissions" : "Permissions",
+      "task" : "Task",
+      "new" : "New Role",
+      "name" : "Name",
+      "value" : "Value"
+    },
+    "withdraw": {
+      "title" : "Withdraw",
+      "all" : "All",
+      "action" :{
+        "add" : "Add withdraw"
+      },
+      "new" : "New withdraw",
+      "trx" : "Transaction",
+      "trxDate" : "Date",
+      "quantity" : "Quantity",
+      "description" : "Description"
+    },
+    "income": {
+      "title" : "Income",
+      "all" : "All",
+      "action" :{
+        "add" : "Add income"
+      },
+      "new" : "New income",
+      "trx" : "Transaction",
+      "trxDate" : "Date",
+      "quantity" : "Quantity",
+      "description" : "Description"
+    },
+    "stock": {
+      "title" : "Stock",
+      "all" : "Stock",
+      "action" :{
+        "add" : "Add Item"
+      },
+      "new" : "New Item",
+      "name" : "Name",
+      "part" : "Part",
+      "minimum" : "Minimum",
+      "current" : "Current",
+      "classification" : "Classification",
+      "location" : "Location",
+      "maximum" : "Maximum",
+      "description" : "Description"
+    },
+    "user": {
+      "title" : "User",
+      "all" : "Users",
+      "action" :{
+        "add" : "Add user"
+      },
+      "task" : "Task",
+      "new" : "New user",
+      "fullName" : "Name",
+      "name" : "Name",
+      "lastName" : "Last name",
+      "role" : "Role",
+      "email" : "Email",
+      "password" :"Password",
+      "confirmPassword" : "Confirm password"
+    },
+    "login" : {
+      "title" : "Login",
+      "email" : "Email",
+      "password" : "Password",
+      "register" : "Register",
+      "error" : {
+        "email.required" : "The email is required",
+        "password.required" : "The password is required"
+      }
+
+    }
+  },
+  "action" :{
+    "search" : "Search",
+    "login" : "Login",
+    "logout" : "Logout",
+    "view" : "View",
+    "delete" : "Delete",
+    "add" : "Add",
+    "edit" : "Edit",
+    "save" : "Save",
+    "selected" : "selected",
+    "cancel" : "Cancel",
+    "closeDialog": "Close dialog"
+  },
+  "section":{
+    "management" : "Management"
+  }
+
+}
